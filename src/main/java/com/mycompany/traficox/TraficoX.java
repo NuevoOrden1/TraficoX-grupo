@@ -11,6 +11,6 @@ package com.mycompany.traficox;
 public class TraficoX {
 
     public static void main(String[] args) {
-        System.out.println("Hello Krilin");
+        System.out.println("prueba gitHub");
     }
 }
