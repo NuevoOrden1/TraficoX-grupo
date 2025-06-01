@@ -135,3 +135,6 @@ Computación Paralela con Java y OpenCL
 https://www.youtube.com/watch?v=oRCARo_pAlo&ab_channel=ByteCode
 
 ## Escribir aqui las dudas o sugerencias ...
+
+Sugerencia 1: Tenemos que estar comunicados para saber como vamos y como afrontar los problemas en equipo
+Sugerencia 2: 
