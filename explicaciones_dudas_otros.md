@@ -130,3 +130,7 @@ Cada colaborador debe:
 
 El proyecto apunta claramente a mostrar beneficios de la programación paralela en simulaciones de gran escala. Es fundamental la colaboración efectiva, enfoque en el rendimiento, y dominio claro de las herramientas seleccionadas (OpenCL, Java, JNI).
 
+## Videos ùtiles  
+Computación Paralela con Java y OpenCL
+https://www.youtube.com/watch?v=oRCARo_pAlo&ab_channel=ByteCode
+
