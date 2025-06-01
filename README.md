@@ -57,7 +57,7 @@ src/
 │       ├── gpu/
 │       │   └── CollisionDetectorJNI.java // interfaz JNI
 │       └── MainSimulator.java
-└── cpp/
+└── cpp/ (Falta implementar/hacer Compatible con NetBeans)
     └── CollisionDetector/
         ├── include/
         │   └── CollisionDetector.h
