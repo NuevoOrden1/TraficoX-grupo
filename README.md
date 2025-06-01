@@ -68,3 +68,122 @@ src/
 ```
 
 
+## **Guía para el grupo: Estructura y Estado Actual del Proyecto `TraficoX`**
+
+### **Visión General**
+
+El proyecto `TraficoX` es una simulación modular de tráfico urbano que tiene como objetivo modelar agentes móviles (por ejemplo, vehículos) e infraestructuras (por ejemplo, semáforos) sobre mapas reales o sintéticos. El sistema está preparado para integrar lógica de colisiones (potencialmente acelerada por GPU), paralelización de procesos y una estructura extensible que permita añadir fácilmente nuevas funcionalidades y tipos de agentes.
+
+---
+
+### **Estructura General de Paquetes y Clases**
+
+#### **1. Paquete `com.mycompany.simulation`**
+
+* **MainSimulator**
+  Clase principal que orquesta la simulación. Carga los agentes desde un archivo OSM, inicializa los módulos principales (gestión de agentes, indexado espacial y detección de colisiones) y ejecuta el bucle principal de simulación.
+
+  * **Advertencia:** Actualmente, el bucle se detiene tras una iteración; es necesario definir una condición real para la finalización de la simulación.
+  * **Sugerencia:** Revisar cómo se procesan las colisiones y cómo debe evolucionar el estado de los agentes.
+
+---
+
+#### **2. Paquete `com.mycompany.simulation.model`**
+
+* **Agent (abstracta)**
+  Clase base para todos los agentes móviles. Define posición, velocidad y métodos básicos.
+
+  * **Advertencia:** El método `getRadius()` es abstracto o puede lanzar excepción si no está implementado en la subclase. **Asegurarse de implementarlo siempre** en cualquier subclase.
+* **VehicleAgent**
+  Ejemplo de agente móvil (vehículo). Implementa `getRadius()` y `update()`, pero requiere completar la lógica de movimiento y atributos adicionales.
+* **TrafficLight**
+  Clase vacía por ahora; pensada para modelar semáforos u otros elementos fijos.
+
+  * **Sugerencia:** Agregar atributos y lógica relevante (estado del semáforo, temporización, etc.).
+
+---
+
+#### **3. Paquete `com.mycompany.simulation.data`**
+
+* **MapLoader**
+  Encargada de cargar los agentes iniciales desde un archivo OSM (OpenStreetMap).
+
+  * **Advertencia:** Actualmente, solo retorna una lista vacía.
+  * **Pendiente:** Implementar el parseo real del archivo OSM y la generación de objetos `Agent`.
+
+---
+
+#### **4. Paquete `com.mycompany.simulation.processing`**
+
+* **AgentManager**
+  Maneja la actualización y gestión paralela de los agentes.
+
+  * **Pendiente:** Implementar el uso real de `ExecutorService` para actualizar y filtrar agentes en paralelo.
+* **IndexBuilder**
+  Encargada de construir índices espaciales para optimizar búsquedas y detección de colisiones.
+
+  * **Pendiente:** Implementar el algoritmo de indexado (cuadrícula, kd-tree, etc.) y considerar paralelización.
+* **TrafficController**
+  Clase vacía por ahora, prevista para gestionar semáforos o la lógica central de control de tráfico.
+
+---
+
+#### **5. Paquete `com.mycompany.simulation.gpu`**
+
+* **ICollisionDetector (interfaz)**
+  Define el método `detectCollisions()` que toma arrays planos de posición y radios, y retorna un array con los pares de colisiones detectados.
+* **DummyCollisionDetector**
+  Implementación de prueba (mock) que siempre retorna un arreglo vacío, útil para el desarrollo sin la necesidad de GPU.
+* **CollisionDetectorJNI**
+  Implementación pensada para usar una librería nativa (C++/OpenCL/CUDA).
+
+  * **Advertencia:** Solo funcionará si la librería nativa está correctamente instalada y accesible en el sistema.
+
+---
+
+### **Aspectos Pendientes e Importantes**
+
+* **MapLoader debe implementarse:**
+  Por ahora no se cargan agentes reales desde el archivo OSM.
+
+  * *Pendiente:* Implementar parser OSM y crear instancias de `Agent` según la información leída.
+* **Métodos vacíos:**
+  Muchas clases (`AgentManager`, `IndexBuilder`, `TrafficController`) solo contienen el esqueleto.
+
+  * *Pendiente:* Completar la lógica de actualización de agentes, gestión paralela e indexado espacial.
+* **Implementar subclases de Agent:**
+  Si se agregan otros tipos de agentes, es obligatorio implementar el método `getRadius()` en cada uno para evitar errores en tiempo de ejecución.
+* **Procesamiento de colisiones:**
+  Actualmente solo se llama a un mock de detección de colisiones. Es necesario definir cómo se procesan e integran los resultados en el ciclo de simulación.
+* **Estructura de archivos y paquetes:**
+  Mantener la convención de paquetes y organizar nuevas clases correctamente.
+* **Condición de fin del ciclo:**
+  Definir claramente cuándo debe terminar la simulación (criterio de parada).
+* **Paralelismo:**
+  Revisar el uso del `ExecutorService` para asegurarse de que no haya fugas de recursos y que la paralelización se realice correctamente.
+
+---
+
+### **Sugerencias Generales y Buenas Prácticas**
+
+1. **No dejar métodos sin implementar**: Usar siempre excepciones claras (`UnsupportedOperationException`) o comentarios `// TODO` bien visibles.
+2. **Documentar las clases nuevas**: Usar javadoc y comentarios explicativos en cada clase/método importante.
+3. **Probar con listas de agentes no vacías**: Antes de hacer cambios mayores, cargar al menos algunos agentes de prueba en `MapLoader` para facilitar el testing.
+4. **No modificar la interfaz pública de las clases clave sin consenso**: Discutir cambios estructurales en grupo.
+5. **Avisar si se añaden dependencias externas** (librerías nativas, frameworks, etc.), y documentar la forma de compilarlas o integrarlas.
+
+---
+
+### **Advertencias**
+
+* **No llamar a `getRadius()` de un Agent base directamente**: Asegúrate de que cada subclase lo implemente.
+* **No confiar en la carga de agentes hasta que MapLoader esté implementado**.
+* **El uso de la versión JNI requiere librerías nativas**. En sistemas Windows o Linux, hay que asegurarse de que el `.dll` o `.so` esté en el `PATH` o `LD_LIBRARY_PATH`.
+
+---
+
+
+
+
+
+
