@@ -1,4 +1,4 @@
-# Tráfico X
+# Sobre Tráfico X
 ## Objetivo del Proyecto
 
 Realizar una **macro-simulación de tráfico urbano** enfocada en evaluar y demostrar cómo la programación paralela (usando GPU o múltiples CPUs simulados) mejora el rendimiento respecto a la ejecución secuencial. El resultado del proyecto será una herramienta que simule millones de agentes (vehículos) en tiempo real o cerca del tiempo real.
@@ -22,7 +22,7 @@ Justificación:
 
 ## Requerimientos y Características Específicas
 
-* Simulación que pueda escalar hasta **millones de agentes**.
+* Simulación que pueda escalar hasta **miles o millones de agentes**.
 * Capacidad de ejecución en GPU o múltiples CPUs simuladas (aprox. 1000 núcleos virtuales).
 * No es necesaria una precisión extremadamente alta en cada interacción individual, sino mostrar claramente la ganancia de rendimiento.
 * ¿Què se puede paralelizar del proyecto? ELegì las colisiones como parte del diseño inicial. Esto es modificable. (Ponernos de acuerdo)
@@ -102,7 +102,9 @@ Cada colaborador debe:
 
 ## Recursos de Hardware
 
-Dado que se dispone únicamente de una GPU AMD RX6600:
+¿Què harware tienen? 
+ alguien tiene GPU NVDIA ?         
+ Tengo una GPU AMD RX6600 
 
 * **Simulación Virtualizada de múltiples núcleos (CPU)**
 
@@ -128,4 +130,3 @@ Dado que se dispone únicamente de una GPU AMD RX6600:
 
 El proyecto apunta claramente a mostrar beneficios de la programación paralela en simulaciones de gran escala. Es fundamental la colaboración efectiva, enfoque en el rendimiento, y dominio claro de las herramientas seleccionadas (OpenCL, Java, JNI).
 
-Este manual debe servir como referencia central para todos los colaboradores, facilitando la contribución efectiva hacia un objetivo común y claramente definido.
