@@ -134,3 +134,4 @@ El proyecto apunta claramente a mostrar beneficios de la programación paralela 
 Computación Paralela con Java y OpenCL
 https://www.youtube.com/watch?v=oRCARo_pAlo&ab_channel=ByteCode
 
+## Escribir aqui las dudas o sugerencias ...
