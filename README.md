@@ -182,6 +182,13 @@ El proyecto `TraficoX` es una simulación modular de tráfico urbano que tiene c
 
 ---
 
+## ⚠️ Consejos importantes para Huang, Melissa, Ariana, Ivett
+
+* **Siempre hacer `git pull` antes de comenzar a trabajar**.
+* Evitar trabajar todos sobre la misma rama `master`, preferir ramas separadas.
+* Usar mensajes de commit claros y descriptivos.
+* Si usan ramas: `git checkout -b nombre-de-rama`
+* En caso de conflictos: resolver con calma, revisar con `git status` y `git diff`.
 
 
 
